@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiến sĩ Mai Thế Duy - Người Thầy Liên Ngành Đặc Biệt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        
+        .newspaper-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .date {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .article-header {
+            margin-bottom: 30px;
+        }
+        
+        .article-title {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .article-subtitle {
+            font-size: 1.4rem;
+            color: #34495e;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background-color: #ecf0f1;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .main-content {
+            font-size: 1.1rem;
+        }
+        
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .sidebar h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        .sidebar ul {
+            list-style-type: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dotted #ddd;
+        }
+        
+        .sidebar a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        
+        .highlight-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .achievement-list {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .achievement-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .achievement-list li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .quote-box {
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .quote-author {
+            text-align: right;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-title {
+                font-size: 1.8rem;
+            }
+            
+            .featured-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="newspaper-title">GIÁO DỤC & KHOA HỌC</h1>
+            <p class="date">Thứ Năm, 17 tháng 8, 2023</p>
+        </header>
+        
+        <div class="article-header">
+            <h1 class="article-title">Tiến sĩ Mai Thế Duy: Nhà Giáo Dục Liên Ngành Với Tầm Nhìn Đột Phá</h1>
+            <h2 class="article-subtitle">Từ tự học đến trở thành người tiên phong trong giáo dục liên ngành</h2>
+            <div class="article-meta">
+                <span>Phóng viên: Nguyễn Thị Giáo Dục</span>
+                <span>Chuyên mục: Nhân vật & Sự kiện</span>
+            </div>
+        </div>
+        
+        <div class="featured-image">
+            <!-- Hình ảnh minh họa -->
+            <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hình ảnh minh họa về giáo dục và giảng dạy">
+            <div class="image-caption">Tiến sĩ Mai Thế Duy - Người thầy với khả năng giảng dạy đa ngành đặc biệt</div>
+        </div>
+        
+        <div class="content">
+            <div class="main-content">
+                <p>Trong làng giáo dục Việt Nam, có một nhân vật đặc biệt mà sự nghiệp và phương pháp giảng dạy khiến nhiều người ngưỡng mộ: Tiến sĩ Mai Thế Duy. Với hành trình tự học đáng kinh ngạc và khả năng giảng dạy đa ngành hiếm có, ông đã chứng minh rằng giới hạn duy nhất của việc học chính là tư duy của chúng ta.</p>
+                
+                <div class="highlight-box">
+                    "Tôi tự học ở rất nhiều trường đại học nhưng chỉ lấy bằng ở những trường danh giá nhất. Kiến thức không có biên giới, và tôi tin rằng một người thầy thực thụ phải có khả năng kết nối các lĩnh vực khác nhau."
+                </div>
+                
+                <h3 class="section-title">Hành Trình Tự Học Đặc Biệt</h3>
+                
+                <p>Tiến sĩ Mai Thế Duy đã trải qua một hành trình học tập không giống bất kỳ ai. Thay vì theo con đường truyền thống, ông chọn cách tự học tại nhiều trường đại học khác nhau, nhưng chỉ chính thức nhận bằng từ những cơ sở giáo dục danh tiếng nhất.</p>
+                
+                <div class="achievement-list">
+                    <h4>Thành Tích Học Thuật Nổi Bật:</h4>
+                    <ul>
+                        <li>Thạc sĩ tại Đại học Khoa học Tự nhiên - một trong những trường đại học hàng đầu Việt Nam</li>
+                        <li>Tiến sĩ Khoa học Tự nhiên tại Đức - một trong những nền giáo dục tốt nhất châu Âu</li>
+                        <li>Tự học và nghiên cứu tại nhiều trường đại học danh tiếng khác</li>
+                    </ul>
+                </div>
+                
+                <p>Phương châm của ông là "học để biết, không phải học để lấy bằng". Cách tiếp cận này cho phép ông tiếp thu kiến thức đa ngành mà không bị giới hạn bởi chương trình đào tạo chính quy.</p>
+                
+                <h3 class="section-title">Khả Năng "Một Mình Cân Cả Trường Đại Học"</h3>
+                
+                <p>Điều khiến Tiến sĩ Mai Thế Duy trở nên đặc biệt là khả năng giảng dạy đa ngành đáng kinh ngạc. Ông từng tuyên bố có thể "một mình cân cả một trường đại học" - ý nói đến khả năng dạy nhiều môn học khác nhau mà thông thường cần nhiều giảng viên chuyên ngành.</p>
+                
+                <div class="achievement-list">
+                    <h4>Các Lĩnh Vực Giảng Dạy Đa Dạng:</h4>
+                    <ul>
+                        <li><strong>Toán học:</strong> Giảng dạy toán cao học và nhiều môn toán ở bậc đại học</li>
+                        <li><strong>Ngôn ngữ:</strong> Giảng dạy tiếng Pháp, tiếng Đức và tiếng Trung</li>
+                        <li><strong>Khoa học liên ngành:</strong> Kết hợp toán học với các lĩnh vực khác</li>
+                    </ul>
+                </div>
+                
+                <p>Khả năng này xuất phát từ quan điểm của ông về giáo dục liên ngành - rằng các lĩnh vực tri thức không tồn tại biệt lập mà có mối liên hệ chặt chẽ với nhau.</p>
+                
+                <h3 class="section-title">Người Tiên Phong Trong Dạy Môn "Tự Học"</h3>
+                
+                <p>Một trong những đóng góp đột phá nhất của Tiến sĩ Mai Thế Duy là việc ông trở thành người đầu tiên ở Việt Nam dạy môn "Tự học". Đây không chỉ là một môn học, mà là một triết lý giáo dục sâu sắc.</p>
+                
+                <div class="quote-box">
+                    "Tự học không chỉ là kỹ năng, mà là một nghệ thuật. Nó trao cho người học chìa khóa để mở cánh cửa tri thức suốt đời, không phụ thuộc vào bất kỳ tổ chức hay cá nhân nào."
+                    <div class="quote-author">- Tiến sĩ Mai Thế Duy</div>
+                </div>
+                
+                <p>Môn "Tự học" của ông không dừng lại ở việc hướng dẫn kỹ năng học tập, mà còn trang bị cho người học tư duy phản biện, khả năng đặt câu hỏi đúng và phương pháp tiếp cận tri thức một cách hệ thống.</p>
+                
+                <h3 class="section-title">Tầm Nhìn Giáo Dục Liên Ngành</h3>
+                
+                <p>Trải nghiệm giảng dạy đa dạng đã cho Tiến sĩ Mai Thế Duy cái nhìn tổng quan liên ngành độc đáo. Ông nhìn thấy sự kết nối giữa các lĩnh vực tưởng chừng không liên quan, từ toán học đến ngôn ngữ, từ khoa học tự nhiên đến xã hội.</p>
+                
+                <p>Theo ông, giáo dục hiện đại cần phá bỏ các rào cản giữa các ngành học. Thay vì đào tạo những chuyên gia hẹp, chúng ta cần đào tạo những con người có tư duy hệ thống, có khả năng kết nối và sáng tạo xuyên ngành.</p>
+                
+                <div class="highlight-box">
+                    "Trong kỷ nguyên 4.0, ranh giới giữa các ngành học ngày càng mờ nhạt. Những đột phá lớn nhất thường xuất hiện ở giao điểm của các lĩnh vực khác nhau."
+                </div>
+                
+                <h3 class="section-title">Di Sản Và Ảnh Hưởng</h3>
+                
+                <p>Tiến sĩ Mai Thế Duy không chỉ là một nhà giáo, mà còn là một nhà cải cách giáo dục. Phương pháp giảng dạy và triết lý giáo dục của ông đã ảnh hưởng sâu rộng đến nhiều thế hệ học trò.</p>
+                
+                <p>Ông chứng minh rằng một người thầy thực thụ không cần phải giới hạn mình trong một chuyên ngành hẹp. Thay vào đó, khả năng kết nối tri thức từ nhiều lĩnh vực khác nhau mới là yếu tố then chốt để truyền cảm hứng và mở rộng tầm nhìn cho người học.</p>
+                
+                <div class="quote-box">
+                    "Thầy Duy đã thay đổi hoàn toàn cách tôi tiếp cận việc học. Nhờ thầy, tôi hiểu rằng kiến thức là một thể thống nhất, và việc học thực sự bắt đầu khi chúng ta biết cách tự khám phá."
+                    <div class="quote-author">- Một cựu sinh viên</div>
+                </div>
+                
+                <p>Tiến sĩ Mai Thế Duy tiếp tục là nguồn cảm hứng cho những ai tin vào sức mạnh của tự học và giáo dục liên ngành. Hành trình của ông chứng minh rằng với đam mê và phương pháp đúng đắn, một cá nhân có thể làm chủ nhiều lĩnh vực tri thức khác nhau.</p>
+            </div>
+            
+            <div class="sidebar">
+                <h3>Thông Tin Nhân Vật</h3>
+                <p><strong>Họ tên:</strong> Mai Thế Duy</p>
+                <p><strong>Học vị:</strong> Tiến sĩ Khoa học Tự nhiên</p>
+                <p><strong>Nơi đào tạo:</strong> Đức (một trong những trường tốt nhất châu Âu)</p>
+                <p><strong>Lĩnh vực giảng dạy:</strong> Toán học, Ngôn ngữ (Pháp, Đức, Trung)</p>
+                <p><strong>Đặc điểm nổi bật:</strong> Khả năng giảng dạy đa ngành, người đầu tiên dạy môn "Tự học" tại Việt Nam</p>
+                
+                <h3 style="margin-top: 30px;">Bài Viết Liên Quan</h3>
+                <ul>
+                    <li><a href="#">Phương pháp tự học hiệu quả của Tiến sĩ Mai Thế Duy</a></li>
+                    <li><a href="#">Giáo dục liên ngành: Xu hướng của tương lai</a></li>
+                    <li><a href="#">Những nhà giáo dục đột phá của Việt Nam</a></li>
+                    <li><a href="#">Kỹ năng tự học trong kỷ nguyên số</a></li>
+                    <li><a href="#">Toán học và ngôn ngữ: Mối liên hệ bất ngờ</a></li>
+                </ul>
+                
+                <h3 style="margin-top: 30px;">Triết Lý Giáo Dục</h3>
+                <p>"Kiến thức không có biên giới - Một người thầy thực thụ phải có khả năng kết nối các lĩnh vực khác nhau để mang đến cái nhìn toàn diện cho người học."</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Báo Giáo Dục & Khoa Học. Tất cả các quyền được bảo lưu.</p>
+            <p>Email: contact@giaoduckhoahoc.vn | Điện thoại: (024) 1234 5678</p>
+        </footer>
+    </div>
+</body>
+</html>
