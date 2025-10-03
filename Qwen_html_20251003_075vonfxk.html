@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đối Thoại Cùng Ngọn Gió | Mai Thế Duy</title>
+    <meta name="description" content="Một hành trình thơ mộng từ chiếc chong chóng tre đến định lý Stokes – nơi toán học và vũ trụ đối thoại." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        :root {
+            --color-sky: #e6f2ff;
+            --color-wind: #b3d9ff;
+            --color-ink: #2c3e50;
+            --color-gold: #d4af37;
+            --color-paper: #fdfcf7;
+            --color-accent: #3498db;
+            --shadow-light: 0 4px 20px rgba(52, 152, 219, 0.15);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* === Hero Section === */
+        .hero {
+            background: linear-gradient(135deg, var(--color-sky) 0%, var(--color-wind) 100%);
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Lora', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .hero .subtitle {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--color-ink);
+            opacity: 0.85;
+            margin-bottom: 30px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--color-ink);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--color-ink);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-light);
+            border: 2px solid var(--color-ink);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--color-ink);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        /* === Section Layout === */
+        .section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 2.4rem;
+            text-align: center;
+            color: var(--color-ink);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: var(--color-gold);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* === Preface === */
+        .preface {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .preface-text {
+            flex: 2;
+            min-width: 300px;
+            font-size: 1.1rem;
+            color: #34495e;
+        }
+
+        .preface-audio {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .preface-audio iframe {
+            width: 100%;
+            max-width: 300px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* === Chapters === */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .chapter-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.25);
+        }
+
+        .chapter-card h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            color: var(--color-ink);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .chapter-card .inspiration {
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+            padding-left: 18px;
+            border-left: 3px solid var(--color-accent);
+            margin-top: 12px;
+        }
+
+        /* === Footer === */
+        .footer {
+            background: var(--color-ink);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 50px 20px 30px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .author-name {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--color-gold);
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero .subtitle {
+                font-size: 1.3rem;
+            }
+            .section {
+                padding: 60px 20px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .btn {
+                padding: 10px 24px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Đối Thoại Cùng Ngọn Gió</h1>
+            <p class="subtitle">Con đường dẫn tới giải tích véc tơ</p>
+            <p class="tagline">
+                Một hành trình từ chiếc chong chóng tre đến định lý Stokes — nơi toán học không còn là công thức, mà là thơ.
+            </p>
+            <a href="#chapters" class="btn">Khám Phá Hành Trình</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Preface -->
+        <section class="section">
+            <h2 class="section-title">Lời Nói Đầu</h2>
+            <div class="preface">
+                <div class="preface-text">
+                    <p>
+                        Trước khi là một bài toán, vũ trụ là một bài thơ. Quyển sách này được sinh ra từ niềm tin rằng con đường đẹp nhất để thấu hiểu các định luật vật lý không phải là ghi nhớ, mà là <strong>đối thoại</strong>.
+                    </p>
+                    <p style="margin-top: 16px;">
+                        Chúng ta sẽ bắt đầu với một câu hỏi đơn sơ trước một chiếc chong chóng tre, và kết thúc bằng cách chiêm ngưỡng sự hợp nhất thanh lịch giữa trực giác vật lý và vẻ đẹp trừu tượng của toán học. Đây là lời mời bạn cùng tham gia vào một cuộc phiêu lưu của tư duy, để lắng nghe và thấu hiểu ngôn ngữ mà vũ trụ đang dùng để tự đối thoại với chính nó.
+                    </p>
+                </div>
+                <div class="preface-audio">
+                    <iframe
+                        src="https://vocaroo.com/embed/1i0XUO5ieULa?autoplay=0"
+                        width="100%"
+                        height="60"
+                        frameborder="0"
+                        allow="autoplay"
+                    ></iframe>
+                    <p style="margin-top: 12px; font-size: 0.9rem; color: #7f8c8d;">
+                        <a href="https://voca.ro/1i0XUO5ieULa" target="_blank" style="color: inherit;">Lắng nghe Lời Tựa</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapters -->
+        <section class="section" id="chapters">
+            <h2 class="section-title">Hành Trình Các Chương Sách</h2>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <h3>Chương 1: Cuộc Gặp Gỡ Đầu Tiên – Chiếc Chong Chóng Tre</h3>
+                    <p class="inspiration">
+                        "Từ một món đồ chơi giản dị, ta học cách đặt những câu hỏi vĩ đại về sự xoay vần của vũ trụ."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 2: Ngôn Ngữ Của Sự Thay Đổi</h3>
+                    <p class="inspiration">
+                        "Nếu mỗi bước đi là một trải nghiệm, giải tích chính là nghệ thuật đo lường sự thông tuệ tích lũy được trên hành trình."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 3: Sân Chơi Vật Lý – Công, Năng Lượng và 'Sân Gió Ma Quái'</h3>
+                    <p class="inspiration">
+                        "Vật lý biến những ký hiệu trừu tượng thành cảm giác thật: sự mệt mỏi khi ngược gió, và niềm hân hoan khi tìm thấy một luồng năng lượng ẩn."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 4: Vi Phân Của Vi Phân – Bí Mật Của Sự Xoáy</h3>
+                    <p class="inspiration">
+                        "Sự thay đổi của sự thay đổi, đó không phải là một khái niệm phức tạp, mà là cấu trúc vi mô của mọi chuyển động xoay tròn trong tự nhiên."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 5: Sự Hợp Nhất Thanh Lịch – Khi Hai Con Đường Là Một</h3>
+                    <p class="inspiration">
+                        "Khoảnh khắc đẹp nhất của khoa học là khi ta nhận ra, con đường mồ hôi của trực giác và con đường thanh lịch của logic lại cùng dẫn về một chân lý."
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Nhà Xuất Bản Mai Duy Khánh Linh</p>
+        <p>Một tác phẩm được dệt nên từ những cuộc đối thoại.</p>
+        <span class="author-name">Tác giả: Mai Thế Duy</span>
+    </footer>
+
+    <!-- Scroll Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.chapter-card');
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, index * 150);
+                        }
+                    });
+                },
+                { threshold: 0.15 }
+            );
+
+            cards.forEach((card) => observer.observe(card));
+        });
+    </script>
+</body>
+</html>
