@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đối Thoại Cùng Ngọn Gió | Mai Thế Duy</title>
+    <meta name="description" content="Một hành trình thơ mộng từ chiếc chong chóng tre đến định lý Stokes – nơi toán học và vũ trụ đối thoại." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    />
+
+    <style>
+        :root {
+            --color-sky: #e6f2ff;
+            --color-wind: #b3d9ff;
+            --color-ink: #2c3e50;
+            --color-gold: #d4af37;
+            --color-paper: #fdfcf7;
+            --color-accent: #3498db;
+            --shadow-light: 0 4px 20px rgba(52, 152, 219, 0.15);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--color-paper);
+            color: var(--color-ink);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* === Bìa sách === */
+        .book-cover-section {
+            background: linear-gradient(135deg, #0a2e5c, #1a5a8c);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book-cover {
+            width: 21cm;
+            height: 29.7cm;
+            background: linear-gradient(135deg, #0a3a6d, #1a6ca8, #2d9cdb);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px;
+            color: #FFD700;
+            max-width: 90vw;
+            max-height: 80vh;
+        }
+
+        .background-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .wind-line {
+            position: absolute;
+            height: 2px;
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 1px;
+            animation: windFlow 15s linear infinite;
+        }
+
+        .wind-line:nth-child(1) { top: 20%; width: 80%; animation-delay: 0s; }
+        .wind-line:nth-child(2) { top: 40%; width: 60%; animation-delay: -3s; }
+        .wind-line:nth-child(3) { top: 60%; width: 70%; animation-delay: -6s; }
+        .wind-line:nth-child(4) { top: 80%; width: 50%; animation-delay: -9s; }
+
+        .center-elements {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .pinwheel {
+            width: 100px;
+            height: 100px;
+            animation: spin 15s linear infinite;
+        }
+
+        .pinwheel-blade {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 15px 50px 15px;
+            border-color: transparent transparent rgba(255, 215, 0, 0.8) transparent;
+            transform-origin: 50% 100%;
+        }
+
+        .pinwheel-blade:nth-child(1) { transform: rotate(0deg); }
+        .pinwheel-blade:nth-child(2) { transform: rotate(90deg); }
+        .pinwheel-blade:nth-child(3) { transform: rotate(180deg); }
+        .pinwheel-blade:nth-child(4) { transform: rotate(270deg); }
+
+        .pinwheel-stick {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 60px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 2px;
+        }
+
+        .math-formulas {
+            display: flex;
+            gap: 30px;
+            font-size: 18px;
+            color: rgba(255, 215, 0, 0.7);
+            animation: floatTogether 20s infinite ease-in-out;
+        }
+
+        .math-symbols {
+            position: absolute;
+            font-size: 16px;
+            color: rgba(255, 215, 0, 0.4);
+            animation: drift 25s infinite linear;
+        }
+
+        .math-symbols:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; animation-duration: 30s; }
+        .math-symbols:nth-child(2) { top: 70%; right: 10%; animation-delay: -5s; animation-duration: 35s; }
+        .math-symbols:nth-child(3) { top: 80%; left: 20%; animation-delay: -10s; animation-duration: 40s; }
+
+        .content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .title {
+            font-size: 58px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+            letter-spacing: 1px;
+            color: #FFD700;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            white-space: nowrap;
+            overflow: hidden;
+            color: #FFD700;
+        }
+
+        .authors {
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #FFD700;
+        }
+
+        .publisher {
+            font-size: 18px;
+            font-weight: 400;
+            color: #FFD700;
+        }
+
+        .quote {
+            font-size: 18px;
+            font-style: italic;
+            text-align: right;
+            max-width: 70%;
+            align-self: flex-end;
+            margin-top: 30px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+            color: #FFD700;
+        }
+
+        /* === Nút đọc sách === */
+        .read-full-btn {
+            display: block;
+            text-align: center;
+            margin: 30px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--color-gold);
+            color: var(--color-ink);
+            padding: 14px 36px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            font-family: 'Lora', serif;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            background: #e6c24a;
+        }
+
+        /* === Các phần còn lại === */
+        .section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 2.4rem;
+            text-align: center;
+            color: var(--color-ink);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: var(--color-gold);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .preface {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .preface-text {
+            flex: 2;
+            min-width: 300px;
+            font-size: 1.1rem;
+            color: #34495e;
+        }
+
+        .preface-audio {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .preface-audio iframe {
+            width: 100%;
+            max-width: 300px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .chapter-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.25);
+        }
+
+        .chapter-card h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            color: var(--color-ink);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .chapter-card .inspiration {
+            font-style: italic;
+            color: #555;
+            font-size: 1rem;
+            padding-left: 18px;
+            border-left: 3px solid var(--color-accent);
+            margin-top: 12px;
+        }
+
+        .footer {
+            background: var(--color-ink);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 50px 20px 30px;
+            margin-top: 60px;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .author-name {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--color-gold);
+            margin-top: 20px;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .book-cover { transform: scale(0.85); }
+        }
+
+        @media (max-width: 900px) {
+            .book-cover { transform: scale(0.7); }
+            .section { padding: 60px 20px; }
+        }
+
+        @media (max-width: 600px) {
+            .book-cover { transform: scale(0.55); }
+            .title { font-size: 42px; }
+            .subtitle { font-size: 20px; }
+            .btn { padding: 12px 28px; font-size: 1.1rem; }
+        }
+
+        /* Animations */
+        @keyframes windFlow {
+            0% { transform: translateX(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes floatTogether {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(10px) rotate(-5deg); }
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -15px) rotate(90deg); }
+            50% { transform: translate(10px, 10px) rotate(180deg); }
+            75% { transform: translate(-15px, 5px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bìa sách -->
+    <section class="book-cover-section">
+        <div class="book-cover">
+            <div class="background-elements">
+                <div class="wind-line"></div>
+                <div class="wind-line"></div>
+                <div class="wind-line"></div>
+                <div class="wind-line"></div>
+
+                <div class="center-elements">
+                    <div class="pinwheel">
+                        <div class="pinwheel-blade"></div>
+                        <div class="pinwheel-blade"></div>
+                        <div class="pinwheel-blade"></div>
+                        <div class="pinwheel-blade"></div>
+                        <div class="pinwheel-stick"></div>
+                    </div>
+                    <div class="math-formulas">
+                        <span>∇ × F</span>
+                        <span>∫</span>
+                        <span>∂/∂x</span>
+                    </div>
+                </div>
+
+                <div class="math-symbols">∮</div>
+                <div class="math-symbols">Δ</div>
+                <div class="math-symbols">∑</div>
+            </div>
+
+            <div class="content">
+                <h1 class="title">Đối thoại cùng ngọn gió</h1>
+                <h2 class="subtitle">Con đường dẫn tới giải tích véc tơ</h2>
+                <div class="authors">Tác giả: Mai Thế Duy và F-Group</div>
+                <div class="publisher">Nhà xuất bản: Mai Duy Khánh Linh</div>
+            </div>
+
+            <div class="quote">
+                "Trước khi là một bài toán, vũ trụ là một bài thơ..."
+            </div>
+        </div>
+    </section>
+
+    <!-- Nút đọc toàn văn -->
+    <div class="read-full-btn">
+        <a href="https://drive.google.com/file/d/1f6DkIJO5umF_gpRwZ98OczHaT27V3KXa/view?usp=sharing" target="_blank" class="btn">📖 Đọc Toàn Văn Sách</a>
+    </div>
+
+    <!-- Lời nói đầu -->
+    <main>
+        <section class="section">
+            <h2 class="section-title">Lời Nói Đầu</h2>
+            <div class="preface">
+                <div class="preface-text">
+                    <p>
+                        Trước khi là một bài toán, vũ trụ là một bài thơ. Quyển sách này được sinh ra từ niềm tin rằng con đường đẹp nhất để thấu hiểu các định luật vật lý không phải là ghi nhớ, mà là <strong>đối thoại</strong>.
+                    </p>
+                    <p style="margin-top: 16px;">
+                        Chúng ta sẽ bắt đầu với một câu hỏi đơn sơ trước một chiếc chong chóng tre, và kết thúc bằng cách chiêm ngưỡng sự hợp nhất thanh lịch giữa trực giác vật lý và vẻ đẹp trừu tượng của toán học. Đây là lời mời bạn cùng tham gia vào một cuộc phiêu lưu của tư duy, để lắng nghe và thấu hiểu ngôn ngữ mà vũ trụ đang dùng để tự đối thoại với chính nó.
+                    </p>
+                </div>
+                <div class="preface-audio">
+                    <iframe
+                        src="https://vocaroo.com/embed/1i0XUO5ieULa?autoplay=0"
+                        width="100%"
+                        height="60"
+                        frameborder="0"
+                        allow="autoplay"
+                    ></iframe>
+                    <p style="margin-top: 12px; font-size: 0.9rem; color: #7f8c8d;">
+                        <a href="https://voca.ro/1i0XUO5ieULa" target="_blank" style="color: inherit;">Lắng nghe Lời Tựa</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Các chương -->
+        <section class="section">
+            <h2 class="section-title">Hành Trình Các Chương Sách</h2>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <h3>Chương 1: Cuộc Gặp Gỡ Đầu Tiên – Chiếc Chong Chóng Tre</h3>
+                    <p class="inspiration">
+                        "Từ một món đồ chơi giản dị, ta học cách đặt những câu hỏi vĩ đại về sự xoay vần của vũ trụ."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 2: Ngôn Ngữ Của Sự Thay Đổi</h3>
+                    <p class="inspiration">
+                        "Nếu mỗi bước đi là một trải nghiệm, giải tích chính là nghệ thuật đo lường sự thông tuệ tích lũy được trên hành trình."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 3: Sân Chơi Vật Lý – Công, Năng Lượng và 'Sân Gió Ma Quái'</h3>
+                    <p class="inspiration">
+                        "Vật lý biến những ký hiệu trừu tượng thành cảm giác thật: sự mệt mỏi khi ngược gió, và niềm hân hoan khi tìm thấy một luồng năng lượng ẩn."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 4: Vi Phân Của Vi Phân – Bí Mật Của Sự Xoáy</h3>
+                    <p class="inspiration">
+                        "Sự thay đổi của sự thay đổi, đó không phải là một khái niệm phức tạp, mà là cấu trúc vi mô của mọi chuyển động xoay tròn trong tự nhiên."
+                    </p>
+                </div>
+
+                <div class="chapter-card">
+                    <h3>Chương 5: Sự Hợp Nhất Thanh Lịch – Khi Hai Con Đường Là Một</h3>
+                    <p class="inspiration">
+                        "Khoảnh khắc đẹp nhất của khoa học là khi ta nhận ra, con đường mồ hôi của trực giác và con đường thanh lịch của logic lại cùng dẫn về một chân lý."
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Nhà Xuất Bản Mai Duy Khánh Linh</p>
+        <p>Một tác phẩm được dệt nên từ những cuộc đối thoại.</p>
+        <span class="author-name">Tác giả: Mai Thế Duy</span>
+    </footer>
+
+    <!-- Scroll Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.chapter-card');
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry, index) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, index * 150);
+                        }
+                    });
+                },
+                { threshold: 0.15 }
+            );
+            cards.forEach((card) => observer.observe(card));
+        });
+    </script>
+</body>
+</html>
